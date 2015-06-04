@@ -32,9 +32,14 @@ jQuery(document).ready(function()
 
 function doCalculation()
 {
-
+	var cartypes=document.getElementById('cartypes').value;
     var address = document.getElementById('source').value;
     var destination = document.getElementById('destination').value;
+    if(cartypes.trim()=='')
+    {
+        alert("Please Select Car Type. if Cartype is empty, then you need to inser first from admin side.");
+        return false;
+    }
     if(address.trim() == '') {
         alert("Please Enter Pickup Address");
         source = '';
@@ -228,8 +233,3 @@ jQuery(document).on('click','.rem',function(){
     //alert(data);
     	         }); 
 });
-
-function addcartype()
-{
-    alert('Please Do not wrtie currency symbol it already hase been written'); return false;
-}
