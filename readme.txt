@@ -1,5 +1,5 @@
 === ASI Fare Calculator===
-Contributors: Adaptive Solution
+Contributors: Adaptive Solution Inc
 Donate link: http://www.adaptivesolutionsinc.com/
 Plugin Name: asi-fare-calculator
 Description: This is a asi-fare-calculator. Use shortcode [asi-fare] to display form on page or use the widget. For more info please check readme file.
@@ -34,5 +34,5 @@ After installation please add shortcode [asi-fare] on your website page for disp
 == Frequently Asked Questions ==
 
 = why am i getting wrong calculated fare? =
-1) Please type all the fare in one currency symbole.
+1) Please type all the fare in one currency symbol.
 
