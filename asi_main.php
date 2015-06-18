@@ -22,14 +22,6 @@ function asi_shortcode($atts) {
 		"label_seat" 		=> __('Car Seats:') ,
 		"label_submit" 		=> __('Submit') ,
 	), $atts));
-    
-    $_SESSION['labels']=array(
-		"label_types" 		=> __('Taxi Type:') ,
-		"label_type1" 		=> __('Sedan') ,
-        "label_type2" 		=> __('Minivan/ SUV') ,
-        "label_stop" 		=> __('Add Additional Stops:') ,
-		"label_seat" 		=> __('Car Seats:') ,
-		"label_submit" 		=> __('Submit'));
          $allfare=get_fares();
          $cartype=new asi_plugin_admin();
          $cartypes=$cartype->Get_selected_car();
