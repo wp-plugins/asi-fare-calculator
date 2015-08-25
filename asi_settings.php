@@ -16,8 +16,12 @@ function asi_scripts() {
         wp_enqueue_script('google-places', $google_map_api);
         wp_register_style('asi_style', plugins_url('css/asi_style.css',__FILE__));
         wp_enqueue_style('asi_style');
+		wp_register_style('asi_bootstrap', plugins_url('css/bootstrap.min.css',__FILE__));
+        wp_enqueue_style('asi_bootstrap');
        	wp_register_script('asi_script', plugins_url('js/asi_script.js', __FILE__ ),array('jquery'));
         wp_enqueue_script('asi_script');    
+        wp_register_script('asi_bootstrapjs', plugins_url('js/bootstrap.min.js', __FILE__ ));
+        wp_enqueue_script('asi_bootstrapjs');  
 	}
 }
 add_action('wp_enqueue_scripts', 'asi_scripts');

@@ -25,7 +25,7 @@ function asi_shortcode($atts) {
          $allfare=get_fares();
          $cartype=new asi_plugin_admin();
          $cartypes=$cartype->Get_selected_car();
-         $select='<select name="cartypes" id="cartypes">';
+         $select='<select name="cartypes" class="form-control" id="cartypes" style="width: 75%;padding-left: 15px; float: right;">';
          foreach($cartypes as $car)
          {
             $select.='<option value="'.$car['fare'].'">'.$car['name'].'</option>';
@@ -34,63 +34,85 @@ function asi_shortcode($atts) {
          $color=$allfare['color'];
          if($color!="")
          {
-            $color='style="background-color:'.$allfare['color'].'"';
+            $color='background-color:'.$allfare['color'];
          }
         
-		$displayform='<form id="order"><div class="taxi_table"'.$color.'><table id="customer_order" class="table-float">
-	<tbody><tr style="border-bottom: solid 1px #104580"><td width="78"  valign="middle" style="padding-bottom: 10px">
-    <div> <strong>'.$label_types.'</strong></div></td><td valign="middle"  style="padding-bottom: 10px">'.$select.'</td></tr><tr>
-	<td colspan="2" style="padding-top: 15px"> 
-    <input id="source" name="source" type="textbox" placeholder="Pickup Address" value="" class="addressBox" />
-            </td></tr>
-		<tr>
-			<td colspan="2" style="padding-bottom: 10px"><strong>'.$label_stop.'</strong> 
-			<input type="textbox" value="0" class="mystop" name="stops_count" id="stops_count"  style="vertical-align: middle" />
-			<div id="stops_div" ></div></td></tr><tr>
-        	<td colspan="2" style="border-bottom: solid 1px #104580;">
-            <input type="textbox" id="destination"  name="destination"  placeholder="Drop Off Address"  class="addressBox" value=""/>
-          </td>
-		</tr>
-    <tr style="border-bottom: solid 1px #104580">
-		<td style="padding-top: 10px; padding-bottom: 10px; width: 108px;">
-        	<strong>Car Seats:</strong></td>
-		<td  style="padding-top: 10px; padding-bottom: 10px">
-		<input type="checkbox" hidden name="baby_seat" id="baby_seat" onChange="set_baby()">   
-        <select name="baby_count" id="baby_count" style="width:85px;   height: 25px; padding-left: 3px; ">
-         <option value="0"> 0</option>
-        <option value="1"> 1</option>
-          <option value="2">2</option>
-            <option value="3">3</option>
-        </select></td></tr>
-  	<tr><td colspan="2">
-                <input type="hidden" name="distance"  id="distance" readonly value=""/>
-                <input type="hidden" name="fare" id="fare" readonly value=""/>
-                <input type="hidden" name="duration" id="duration" readonly value=""/>
-            </td></tr>
-  <tr>
-    <td colspan="2" align="center" valign="bottom" style="padding-top: 12px">
-      <input type="button" id="cal1" name="submit" value="Calculate" onClick="doCalculation()"/>
-      <input type="button" id="res1" name="reset" value="Reset" style="margin-left: 10px;"  onclick="clear_form_elements(this.form)"/>
-    </td>
-  </tr>
-                <input type="hidden"  name="stopfare" id="stopfare" value="'.$allfare['stop'].'"/>
-                <input type="hidden"  name="milefare" id="milefare" value="'.$allfare['mile'].'"/>
-                <input type="hidden"  name="seatfare" id="seatfare" value="'.$allfare['seat'].'"/>
-                <input type="hidden"  name="minutefare" id="minutefare" value="'.$allfare['minute'].'"/>
-                <input type="hidden"  name="currfare" id="currfare" value="'.$allfare['curr'].'"/>
-                <input type="hidden"  name="latitude" id="latitude" value=""/>
-                <input type="hidden" name="longitude" id="longitude" value=""/>
-                <input type="hidden" name="dest_latitude" id="dest_latitude" value=""/>
-                <input type="hidden" name="dest_longitude" id="dest_longitude" value=""/>
-</tbody></table>
-	<div class="table-float" style="text-align: center">
+		$displayform='<div class="container">
+			<div class="row">
+				<div class="col-lg-5 col-md-6 col-sm-7 col-xs-12" id="main1" style="'.$color.'; padding-bottom: 15px">
+					<form id="order" method="">
+			
+						<div class="row">
+							<label class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px">
+							<strong>Taxi Type:</strong>
+							</label>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px;">
+								'.$select.'
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top: 15px;">
+								<input type="text" class="form-control" id="source" name="source" placeholder="PickUp Address">
+								<input style="display: none;" type="text" hidden class="form-control" id="stops_count_s" name="stops_count">
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px">
+								Additional Stops :
+							</label>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px;">
+								<input style="padding-left: 15px; width: 75%; float: right;" class="form-control" type="number" value="0" min="0" name="stops_count" id="stops_count">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top: 15px;">
+								<input type="textbox" id="destination" name="destination" placeholder="DropOff Address" class="form-control" value="" />
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px">
+							<strong>Car Seats:</strong>
+							</label>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-top: 15px;">
+                            
+                            <input type="checkbox" hidden name="baby_seat" id="baby_seat" onChange="set_baby()">   
+        <select name="baby_count" id="baby_count" class="form-control" style="width: 75%;padding-left: 15px; float: right;">
+                 <option value="0"> 0</option>
+                <option value="1"> 1</option>
+                  <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                                </div>
+						</div>
+					
+						<div class="calBlue_line">
+						</div>
+						<div class="form-group">
+							<div class="col-xs-12" style="text-align: center;padding-top: 15px; margin-bottom: 15px">
+								<input type="button" class="btn btn-primary " id="cal1" name="submit" value="Calculate" onClick="doCalculation()" style="font-size: 14px; font-weight: bold" />
+								<input type="button" class="btn" name="reset" value="Reset" onclick="clear_form_elements(this.form)" style="font-size: 14px; font-weight: bold;" />
+							</div>
+                             <input type="hidden" name="distance"  id="distance" readonly value=""/>
+                            <input type="hidden" name="fare" id="fare" readonly value=""/>
+                            <input type="hidden" name="duration" id="duration" readonly value=""/>
+                            <input type="hidden"  name="stopfare" id="stopfare" value="'.$allfare['stop'].'"/>
+                            <input type="hidden"  name="milefare" id="milefare" value="'.$allfare['mile'].'"/>
+                             <input type="hidden"  name="seatfare" id="seatfare" value="'.$allfare['seat'].'"/>
+                            <input type="hidden"  name="minutefare" id="minutefare" value="'.$allfare['minute'].'"/>
+                            <input type="hidden"  name="currfare" id="currfare" value="'.$allfare['curr'].'"/>
+                
+						</div>
+						<div class="table-float" style="text-align: center; margin-top: 10px; float: none">
+							<div id="po" style="display: inline-block; text-align: left">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+     	<div class="table-float" style="text-align: center">
 		<div id="po" style="display: none; text-align: left"></div> 
-	</div>
-	<div class="clear"></div>
-</div>
-<div class="clear"></div>
-</form> 
-';
+	</div>';
 return $displayform;
 } 
 ?>
